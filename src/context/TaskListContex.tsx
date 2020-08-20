@@ -1,18 +1,23 @@
 import React, { createContext, useState } from 'react';
 
-interface ITask {
+// interface ITask {
+//   task: string;
+//   id: number;
+// }
+// type TaskListContextType = Array<ITask>;
+type ITask = {
   task: string;
   id: number;
+};
+interface TaskListContextType {
+  tasks: Array<ITask>;
 }
-type initialState = Array<ITask>;
 
-export const TaskListContext = createContext<initialState | undefined>(
-  undefined
-);
+export const TaskListContext = createContext<TaskListContextType>(undefined!);
 
 export interface TaskListContextProviderProps {}
 
-const TaskListContextProvider: React.SFC<TaskListContextProviderProps> = ({
+const TaskListContextProvider: React.FC<TaskListContextProviderProps> = ({
   children,
 }) => {
   const [tasks, setTasks] = useState([
@@ -21,7 +26,7 @@ const TaskListContextProvider: React.SFC<TaskListContextProviderProps> = ({
     { task: 'Do the shopping', id: 3 },
   ]);
   return (
-    <TaskListContext.Provider value={tasks}>
+    <TaskListContext.Provider value={{ tasks }}>
       {children}
     </TaskListContext.Provider>
   );
