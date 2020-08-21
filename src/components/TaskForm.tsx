@@ -1,16 +1,27 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { TaskListContext } from '../context/TaskListContex';
 
 export interface TaskFormProps {}
 
 const TaskForm: React.FC<TaskFormProps> = () => {
-  const { addTask, clearTaskList } = useContext(TaskListContext);
+  const { addTask, clearTaskList, editItem, editTask } = useContext(
+    TaskListContext
+  );
   const [title, setTitle] = useState<string>('');
+
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     addTask(title);
     setTitle('');
   };
+
+  useEffect(() => {
+    if (editItem !== undefined) {
+      setTitle(editItem.title);
+    } else {
+      setTitle('');
+    }
+  }, [editItem]);
   return (
     <form className='form' onSubmit={handleSubmit}>
       <input

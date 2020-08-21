@@ -10,7 +10,9 @@ interface TaskListContextType {
   addTask: (title: string) => void;
   removeTask: (id: string) => void;
   clearTaskList: () => void;
-  findItem: (id: string) => ITask | undefined;
+  findItem: (id: string) => void;
+  editTask: (title: string, id: string) => void;
+  editItem: ITask | undefined;
 }
 
 export const TaskListContext = createContext<TaskListContextType>(undefined!);
@@ -26,7 +28,7 @@ const TaskListContextProvider: React.FC<TaskListContextProviderProps> = ({
     { title: 'Do the shopping', id: '3' },
   ]);
 
-  const [editItem, setEditItem] = useState<string | null>(null);
+  const [editItem, setEditItem] = useState<ITask | undefined>(undefined);
 
   const addTask = (title: string) => {
     setTasks([...tasks, { title, id: uuid() }]);
@@ -36,12 +38,27 @@ const TaskListContextProvider: React.FC<TaskListContextProviderProps> = ({
   };
   const clearTaskList = () => setTasks([]);
 
-  const findItem = (id: string): ITask | undefined => {
-    return tasks.find(task => task.id === id);
+  const findItem = (id: string) => {
+    const item = tasks.find(task => task.id === id);
+    setEditItem(item);
+  };
+  const editTask = (title: string, id: string) => {
+    const newTasks: Array<ITask> = tasks.map(task => {
+      return task.id === id ? { title, id } : task;
+    });
+    setTasks(newTasks);
   };
   return (
     <TaskListContext.Provider
-      value={{ tasks, addTask, removeTask, clearTaskList, findItem }}
+      value={{
+        tasks,
+        addTask,
+        removeTask,
+        clearTaskList,
+        findItem,
+        editTask,
+        editItem,
+      }}
     >
       {children}
     </TaskListContext.Provider>
