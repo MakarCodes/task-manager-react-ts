@@ -21,8 +21,12 @@ const TaskListContextProvider: React.FC<TaskListContextProviderProps> = ({
     { title: 'Cook a dinner', id: '2' },
     { title: 'Do the shopping', id: '3' },
   ]);
+
   const addTask = (title: string) => {
     setTasks([...tasks, { title, id: uuid() }]);
+  };
+  const removeTask = (id: string) => {
+    setTasks(tasks.filter(task => task.id !== id));
   };
   return (
     <TaskListContext.Provider value={{ tasks }}>
