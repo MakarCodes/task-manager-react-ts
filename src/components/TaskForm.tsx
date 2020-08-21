@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface TaskFormProps {}
 
-const TaskForm: React.SFC<TaskFormProps> = () => {
+const TaskForm: React.FC<TaskFormProps> = () => {
   return (
     <form className='form'>
       <input
