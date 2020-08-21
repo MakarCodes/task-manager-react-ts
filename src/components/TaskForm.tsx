@@ -38,7 +38,7 @@ const TaskForm: React.FC<TaskFormProps> = () => {
       />
       <div className='buttons'>
         <button type='submit' className='btn add-task-btn'>
-          Add task
+          {editItem ? 'Edit task' : 'Add task'}
         </button>
         <button
           className='btn clear-btn'
