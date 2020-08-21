@@ -4,7 +4,7 @@ import { TaskListContext } from '../context/TaskListContex';
 export interface TaskFormProps {}
 
 const TaskForm: React.FC<TaskFormProps> = () => {
-  const { addTask } = useContext(TaskListContext);
+  const { addTask, clearTaskList } = useContext(TaskListContext);
   const [title, setTitle] = useState<string>('');
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -25,7 +25,14 @@ const TaskForm: React.FC<TaskFormProps> = () => {
         <button type='submit' className='btn add-task-btn'>
           Add task
         </button>
-        <button className='btn clear-btn'>Clear</button>
+        <button
+          className='btn clear-btn'
+          onClick={() => {
+            return clearTaskList();
+          }}
+        >
+          Clear
+        </button>
       </div>
     </form>
   );
