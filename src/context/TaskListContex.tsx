@@ -10,6 +10,7 @@ interface TaskListContextType {
   addTask: (title: string) => void;
   removeTask: (id: string) => void;
   clearTaskList: () => void;
+  findItem: (id: string) => ITask | undefined;
 }
 
 export const TaskListContext = createContext<TaskListContextType>(undefined!);
@@ -25,6 +26,8 @@ const TaskListContextProvider: React.FC<TaskListContextProviderProps> = ({
     { title: 'Do the shopping', id: '3' },
   ]);
 
+  const [editItem, setEditItem] = useState<string | null>(null);
+
   const addTask = (title: string) => {
     setTasks([...tasks, { title, id: uuid() }]);
   };
@@ -32,9 +35,13 @@ const TaskListContextProvider: React.FC<TaskListContextProviderProps> = ({
     setTasks(tasks.filter(task => task.id !== id));
   };
   const clearTaskList = () => setTasks([]);
+
+  const findItem = (id: string): ITask | undefined => {
+    return tasks.find(task => task.id === id);
+  };
   return (
     <TaskListContext.Provider
-      value={{ tasks, addTask, removeTask, clearTaskList }}
+      value={{ tasks, addTask, removeTask, clearTaskList, findItem }}
     >
       {children}
     </TaskListContext.Provider>

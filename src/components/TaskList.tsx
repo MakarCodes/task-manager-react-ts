@@ -6,11 +6,15 @@ const TaskList: React.FC = () => {
   const { tasks } = useContext(TaskListContext);
   return (
     <React.Fragment>
-      <ul className='list'>
-        {tasks.map(task => {
-          return <Task task={task} key={task.id} />;
-        })}
-      </ul>
+      {tasks.length ? (
+        <ul className='list'>
+          {tasks.map(task => {
+            return <Task task={task} key={task.id} />;
+          })}
+        </ul>
+      ) : (
+        <div className='no-tasks'>No tasks to do...</div>
+      )}
     </React.Fragment>
   );
 };
