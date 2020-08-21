@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { TaskListContext } from '../context/TaskListContex';
 
 export interface TaskFormProps {}
 
 const TaskForm: React.FC<TaskFormProps> = () => {
+  const { addTask } = useContext(TaskListContext);
+  const [title, setTitle] = useState<string>('');
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    addTask(title);
+    setTitle('');
+  };
   return (
-    <form className='form'>
+    <form className='form' onSubmit={handleSubmit}>
       <input
         type='text'
         className='task-input'
         placeholder='Add task...'
+        value={title}
+        onChange={e => setTitle(e.target.value)}
         required
       />
       <div className='buttons'>

@@ -7,6 +7,8 @@ type ITask = {
 };
 interface TaskListContextType {
   tasks: Array<ITask>;
+  addTask: (title: string) => void;
+  removeTask: (id: string) => void;
 }
 
 export const TaskListContext = createContext<TaskListContextType>(undefined!);
@@ -29,7 +31,7 @@ const TaskListContextProvider: React.FC<TaskListContextProviderProps> = ({
     setTasks(tasks.filter(task => task.id !== id));
   };
   return (
-    <TaskListContext.Provider value={{ tasks }}>
+    <TaskListContext.Provider value={{ tasks, addTask, removeTask }}>
       {children}
     </TaskListContext.Provider>
   );
