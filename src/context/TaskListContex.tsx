@@ -47,6 +47,7 @@ const TaskListContextProvider: React.FC<TaskListContextProviderProps> = ({
       return task.id === id ? { title, id } : task;
     });
     setTasks(newTasks);
+    setEditItem(undefined);
   };
   return (
     <TaskListContext.Provider
