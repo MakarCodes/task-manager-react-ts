@@ -4,8 +4,7 @@ type TaskPropsType = { taskText: string };
 
 const Task: React.FC<TaskPropsType> = ({ taskText }) => {
   return (
-    <li className='list-name'>
-      <span>Task title</span>
+    <li className='list-item'>
       <span>{taskText}</span>
       <div>
         <button className='btn-delete task-btn'>

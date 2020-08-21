@@ -6,7 +6,7 @@ import React, { createContext, useState } from 'react';
 // }
 // type TaskListContextType = Array<ITask>;
 type ITask = {
-  task: string;
+  title: string;
   id: number;
 };
 interface TaskListContextType {
@@ -21,9 +21,9 @@ const TaskListContextProvider: React.FC<TaskListContextProviderProps> = ({
   children,
 }) => {
   const [tasks, setTasks] = useState([
-    { task: 'Make some code', id: 1 },
-    { task: 'Cook a dinner', id: 2 },
-    { task: 'Do the shopping', id: 3 },
+    { title: 'Make some code', id: 1 },
+    { title: 'Cook a dinner', id: 2 },
+    { title: 'Do the shopping', id: 3 },
   ]);
   return (
     <TaskListContext.Provider value={{ tasks }}>

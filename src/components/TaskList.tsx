@@ -8,7 +8,7 @@ const TaskList: React.FC = () => {
     <React.Fragment>
       <ul className='list'>
         {tasks.map(task => {
-          return <Task taskText={task.task} key={task.id} />;
+          return <Task taskText={task.title} key={task.id} />;
         })}
       </ul>
     </React.Fragment>
