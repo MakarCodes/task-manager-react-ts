@@ -11,7 +11,7 @@ const TaskForm: React.FC<TaskFormProps> = () => {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    if (editItem !== undefined) {
+    if (editItem) {
       editTask(title, editItem.id);
     } else {
       addTask(title);
@@ -20,7 +20,7 @@ const TaskForm: React.FC<TaskFormProps> = () => {
   };
 
   useEffect(() => {
-    if (editItem !== undefined) {
+    if (editItem) {
       setTitle(editItem.title);
     } else {
       setTitle('');

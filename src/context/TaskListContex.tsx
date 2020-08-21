@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { uuid } from 'uuidv4';
 
 type ITask = {
@@ -17,11 +17,7 @@ interface TaskListContextType {
 
 export const TaskListContext = createContext<TaskListContextType>(undefined!);
 
-export interface TaskListContextProviderProps {}
-
-const TaskListContextProvider: React.FC<TaskListContextProviderProps> = ({
-  children,
-}) => {
+const TaskListContextProvider: React.FC = ({ children }) => {
   const [tasks, setTasks] = useState([
     { title: 'Make some code', id: '1' },
     { title: 'Cook a dinner', id: '2' },
