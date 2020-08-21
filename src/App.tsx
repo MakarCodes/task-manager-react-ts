@@ -1,6 +1,7 @@
 import React from 'react';
 import TaskListContextProvider from './context/TaskListContex';
 import TaskList from './components/TaskList';
+import TaskForm from './components/TaskForm';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <div className='container'>
           <div className='app-wrapper'>
             <div className='main'>
+              <TaskForm />
               <TaskList />
             </div>
           </div>
