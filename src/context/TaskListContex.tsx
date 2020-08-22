@@ -28,8 +28,10 @@ const TaskListContextProvider: React.FC = ({ children }) => {
   }, [tasks]);
 
   const findItem = (id: string) => {
-    const item = tasks.find((task: ITask) => task.id === id);
-    setEditItem(item);
+    const item: ITask | undefined = tasks.find((task: ITask) => task.id === id);
+    if (item !== undefined) {
+      setEditItem(item);
+    }
   };
 
   return (
