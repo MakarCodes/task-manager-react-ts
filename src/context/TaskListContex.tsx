@@ -18,12 +18,11 @@ interface TaskListContextType {
 export const TaskListContext = createContext<TaskListContextType>(undefined!);
 
 const TaskListContextProvider: React.FC = ({ children }) => {
-  const initialData = JSON.parse(localStorage.getItem('tasks') || '[]');
+  const initialData: Array<ITask> = JSON.parse(
+    localStorage.getItem('tasks') || '[]'
+  );
 
-  const [tasks, setTasks] = useState(initialData);
-  // { title: 'Make some code', id: '1' },
-  // { title: 'Cook a dinner', id: '2' },
-  // { title: 'Do the shopping', id: '3' },
+  const [tasks, setTasks] = useState<Array<ITask>>(initialData);
 
   const [editItem, setEditItem] = useState<ITask | undefined>(undefined);
 
