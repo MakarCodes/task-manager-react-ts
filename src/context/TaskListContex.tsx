@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useReducer } from 'react';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { TaskListReducer } from '../reducers/TaskListReducer';
 
 type ITask = {
