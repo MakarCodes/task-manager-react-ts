@@ -11,7 +11,6 @@ const TaskForm: React.FC<TaskFormProps> = () => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (editItem) {
-      // dispatch(title, editItem.id);
       dispatch({
         type: actionTypes.EDIT_LIST,
         payload: {

@@ -11,8 +11,6 @@ interface IAction {
   payload: payloadType;
 }
 
-// whypayloadType doesnt require title and id?!
-
 export const TaskListReducer = (state: Array<payloadType>, action: IAction) => {
   switch (action.type) {
     case actionTypes.ADD_TASK:
