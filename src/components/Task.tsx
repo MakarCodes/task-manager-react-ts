@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { TaskListContext } from '../context/TaskListContex';
+import * as actionTypes from '../reducers/actionTypes';
 
 type TaskPropsType = {
   task: {
@@ -18,7 +19,7 @@ const Task: React.FC<TaskPropsType> = ({ task }) => {
           className='btn-delete task-btn'
           onClick={() => {
             return dispatch({
-              type: 'REMOVE_TASK',
+              type: actionTypes.REMOVE_TASK,
               payload: {
                 id: task.id,
               },

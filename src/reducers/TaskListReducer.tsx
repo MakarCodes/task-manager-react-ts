@@ -16,16 +16,18 @@ interface IAction {
 export const TaskListReducer = (state: Array<payloadType>, action: IAction) => {
   switch (action.type) {
     case actionTypes.ADD_TASK:
-      console.log('add working');
-      console.log(action.payload);
       return [...state, { title: action.payload.title, id: uuidv4() }];
     case actionTypes.REMOVE_TASK:
-      console.log(action.payload);
       return state.filter((task: payloadType) => task.id !== action.payload.id);
     case actionTypes.CLEAR_TASK_LIST:
       return [];
-    case actionTypes.FIND_ITEM:
-
+    case actionTypes.EDIT_LIST:
+      const newTasks: Array<payloadType> = state.map((task: payloadType) => {
+        return task.id === action.payload.id
+          ? { title: action.payload.title, id: action.payload.id }
+          : task;
+      });
+      return newTasks;
     default:
       return state;
   }

@@ -6,14 +6,12 @@ type ITask = {
   title: string;
   id: string;
 };
+
 interface TaskListContextType {
   tasks: Array<ITask>;
-  // addTask: (title: string) => void;
-  // removeTask: (id: string) => void;
   dispatch: any;
-  // clearTaskList: () => void;
   findItem: (id: string) => void;
-  editTask: (title: string, id: string) => void;
+  setEditItem: any;
   editItem: ITask | undefined;
 }
 
@@ -25,7 +23,7 @@ const TaskListContextProvider: React.FC = ({ children }) => {
   );
 
   // const [tasks, setTasks] = useState<Array<ITask>>(initialData);
-  const [tasks, dispatch] = useReducer(TaskListReducer, []);
+  const [tasks, dispatch] = useReducer(TaskListReducer, initialData);
 
   const [editItem, setEditItem] = useState<ITask | undefined>(undefined);
 
@@ -45,20 +43,20 @@ const TaskListContextProvider: React.FC = ({ children }) => {
     const item = tasks.find((task: ITask) => task.id === id);
     setEditItem(item);
   };
-  const editTask = (title: string, id: string) => {
-    const newTasks: Array<ITask> = tasks.map((task: ITask) => {
-      return task.id === id ? { title, id } : task;
-    });
-    // setTasks(newTasks);
-    setEditItem(undefined);
-  };
+  // const editTask = (title: string, id: string) => {
+  //   const newTasks: Array<ITask> = tasks.map((task: ITask) => {
+  //     return task.id === id ? { title, id } : task;
+  //   });
+  //   // setTasks(newTasks);
+  //   setEditItem(undefined);
+  // };
   return (
     <TaskListContext.Provider
       value={{
         tasks,
         dispatch,
         findItem,
-        editTask,
+        setEditItem,
         editItem,
       }}
     >

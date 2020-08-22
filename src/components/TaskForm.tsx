@@ -1,20 +1,28 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { TaskListContext } from '../context/TaskListContex';
+import * as actionTypes from '../reducers/actionTypes';
 
 export interface TaskFormProps {}
 
 const TaskForm: React.FC<TaskFormProps> = () => {
-  const { dispatch, editItem, editTask } = useContext(TaskListContext);
+  const { dispatch, editItem, setEditItem } = useContext(TaskListContext);
   const [title, setTitle] = useState<string>('');
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (editItem) {
-      editTask(title, editItem.id);
-    } else {
-      console.log('add working');
+      // dispatch(title, editItem.id);
       dispatch({
-        type: 'ADD_TASK',
+        type: actionTypes.EDIT_LIST,
+        payload: {
+          title,
+          id: editItem.id,
+        },
+      });
+      setEditItem(undefined);
+    } else {
+      dispatch({
+        type: actionTypes.ADD_TASK,
         payload: {
           title,
         },
@@ -47,7 +55,7 @@ const TaskForm: React.FC<TaskFormProps> = () => {
         <button
           className='btn clear-btn'
           onClick={() => {
-            return dispatch({ type: 'CLEAR_TASK_LIST' });
+            return dispatch({ type: actionTypes.CLEAR_TASK_LIST });
           }}
         >
           Clear
