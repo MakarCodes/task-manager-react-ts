@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useReducer } from 'react';
 import { uuid } from 'uuidv4';
+import { TaskListReducer } from '../reducers/TaskListReducer';
 
 type ITask = {
   title: string;
@@ -7,9 +8,10 @@ type ITask = {
 };
 interface TaskListContextType {
   tasks: Array<ITask>;
-  addTask: (title: string) => void;
-  removeTask: (id: string) => void;
-  clearTaskList: () => void;
+  // addTask: (title: string) => void;
+  // removeTask: (id: string) => void;
+  dispatch: any;
+  // clearTaskList: () => void;
   findItem: (id: string) => void;
   editTask: (title: string, id: string) => void;
   editItem: ITask | undefined;
@@ -22,7 +24,8 @@ const TaskListContextProvider: React.FC = ({ children }) => {
     localStorage.getItem('tasks') || '[]'
   );
 
-  const [tasks, setTasks] = useState<Array<ITask>>(initialData);
+  // const [tasks, setTasks] = useState<Array<ITask>>(initialData);
+  const [tasks, dispatch] = useReducer(TaskListReducer, []);
 
   const [editItem, setEditItem] = useState<ITask | undefined>(undefined);
 
@@ -30,13 +33,13 @@ const TaskListContextProvider: React.FC = ({ children }) => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  const addTask = (title: string) => {
-    setTasks([...tasks, { title, id: uuid() }]);
-  };
-  const removeTask = (id: string) => {
-    setTasks(tasks.filter((task: ITask) => task.id !== id));
-  };
-  const clearTaskList = () => setTasks([]);
+  // const addTask = (title: string) => {
+  //   setTasks([...tasks, { title, id: uuid() }]);
+  // };
+  // const removeTask = (id: string) => {
+  //   setTasks(tasks.filter((task: ITask) => task.id !== id));
+  // };
+  // const clearTaskList = () => setTasks([]);
 
   const findItem = (id: string) => {
     const item = tasks.find((task: ITask) => task.id === id);
@@ -46,16 +49,14 @@ const TaskListContextProvider: React.FC = ({ children }) => {
     const newTasks: Array<ITask> = tasks.map((task: ITask) => {
       return task.id === id ? { title, id } : task;
     });
-    setTasks(newTasks);
+    // setTasks(newTasks);
     setEditItem(undefined);
   };
   return (
     <TaskListContext.Provider
       value={{
         tasks,
-        addTask,
-        removeTask,
-        clearTaskList,
+        dispatch,
         findItem,
         editTask,
         editItem,

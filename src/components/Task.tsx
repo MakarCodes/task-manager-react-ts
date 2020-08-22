@@ -9,7 +9,7 @@ type TaskPropsType = {
 };
 
 const Task: React.FC<TaskPropsType> = ({ task }) => {
-  const { removeTask, findItem } = useContext(TaskListContext);
+  const { dispatch, findItem } = useContext(TaskListContext);
   return (
     <li className='list-item'>
       <span>{task.title}</span>
@@ -17,7 +17,12 @@ const Task: React.FC<TaskPropsType> = ({ task }) => {
         <button
           className='btn-delete task-btn'
           onClick={() => {
-            return removeTask(task.id);
+            return dispatch({
+              type: 'REMOVE_TASK',
+              payload: {
+                id: task.id,
+              },
+            });
           }}
         >
           <i className='fas fa-trash-alt'></i>
