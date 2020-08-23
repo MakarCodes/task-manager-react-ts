@@ -1,6 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { TaskListContext } from '../context/TaskListContex';
-import { ActionTypes } from '../reducers/actionTypes';
+import { TaskListContext } from '../../context/TaskListContex';
+import { ActionTypes } from '../../reducers/actionTypes';
+import {
+  Form,
+  TaskInput,
+  ButtonsContainer,
+  AddButton,
+  ClearButton,
+} from './TaskForm.styles';
 
 const TaskForm: React.FC = () => {
   const { dispatch, editItem, setEditItem } = useContext(TaskListContext);
@@ -35,30 +42,30 @@ const TaskForm: React.FC = () => {
       setTitle('');
     }
   }, [editItem]);
+
+  let edit = editItem ? true : false;
   return (
-    <form className='form' onSubmit={handleSubmit}>
-      <input
+    <Form onSubmit={handleSubmit}>
+      <TaskInput
         type='text'
-        className='task-input'
         placeholder='Add task...'
         value={title}
         onChange={e => setTitle(e.target.value)}
         required
       />
-      <div className='buttons'>
-        <button type='submit' className='btn add-task-btn'>
+      <ButtonsContainer>
+        <AddButton edit={edit} type='submit'>
           {editItem ? 'Edit task' : 'Add task'}
-        </button>
-        <button
-          className='btn clear-btn'
+        </AddButton>
+        <ClearButton
           onClick={() => {
             return dispatch({ type: ActionTypes.CLEAR_TASK_LIST });
           }}
         >
           Clear
-        </button>
-      </div>
-    </form>
+        </ClearButton>
+      </ButtonsContainer>
+    </Form>
   );
 };
 

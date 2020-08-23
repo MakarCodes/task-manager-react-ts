@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { TaskListContext } from '../context/TaskListContex';
-import { ActionTypes } from '../reducers/actionTypes';
+import { TaskListContext } from '../../context/TaskListContex';
+import { ActionTypes } from '../../reducers/actionTypes';
+import { ListItem, TaskTitle, DeleteButton, EditButton } from './Task.styles';
 
 interface ITaskProps {
   task: ITask;
@@ -8,12 +9,12 @@ interface ITaskProps {
 
 const Task: React.FC<ITaskProps> = ({ task }) => {
   const { dispatch, findItem } = useContext(TaskListContext);
+  const a = true;
   return (
-    <li className='list-item'>
-      <span>{task.title}</span>
+    <ListItem>
+      <TaskTitle>{task.title}</TaskTitle>
       <div>
-        <button
-          className='btn-delete task-btn'
+        <DeleteButton
           onClick={() => {
             return dispatch({
               type: ActionTypes.REMOVE_TASK,
@@ -24,17 +25,16 @@ const Task: React.FC<ITaskProps> = ({ task }) => {
           }}
         >
           <i className='fas fa-trash-alt'></i>
-        </button>
-        <button
-          className='btn-edit task-btn'
+        </DeleteButton>
+        <EditButton
           onClick={() => {
             return findItem(task.id);
           }}
         >
           <i className='fas fa-pen'></i>
-        </button>
+        </EditButton>
       </div>
-    </li>
+    </ListItem>
   );
 };
 
