@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { TaskListContext } from '../context/TaskListContex';
-import { actionTypes } from '../reducers/actionTypes';
+import { ActionTypes } from '../reducers/actionTypes';
 
 const TaskForm: React.FC = () => {
   const { dispatch, editItem, setEditItem } = useContext(TaskListContext);
@@ -10,7 +10,7 @@ const TaskForm: React.FC = () => {
     e.preventDefault();
     if (editItem) {
       dispatch({
-        type: actionTypes.EDIT_LIST,
+        type: ActionTypes.EDIT_LIST,
         payload: {
           title,
           id: editItem.id,
@@ -19,7 +19,7 @@ const TaskForm: React.FC = () => {
       setEditItem(undefined);
     } else {
       dispatch({
-        type: actionTypes.ADD_TASK,
+        type: ActionTypes.ADD_TASK,
         payload: {
           title,
         },
@@ -52,7 +52,7 @@ const TaskForm: React.FC = () => {
         <button
           className='btn clear-btn'
           onClick={() => {
-            return dispatch({ type: actionTypes.CLEAR_TASK_LIST });
+            return dispatch({ type: ActionTypes.CLEAR_TASK_LIST });
           }}
         >
           Clear

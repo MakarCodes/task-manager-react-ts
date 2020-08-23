@@ -1,37 +1,34 @@
 import React, { createContext, useState, useEffect, useReducer } from 'react';
 import { TaskListReducer } from '../reducers/TaskListReducer';
 
-type ITask = {
-  title: string;
-  id: string;
-};
-
 interface TaskListContextType {
-  tasks: Array<ITask>;
-  dispatch: any;
+  tasks: State;
+  dispatch: (value: Actions) => void;
   findItem: (id: string) => void;
-  setEditItem: (value: ITask | undefined) => void;
+  setEditItem: (item: ITask | undefined) => void;
   editItem: ITask | undefined;
 }
+type Props = {
+  children: JSX.Element;
+};
 
 export const TaskListContext = createContext<TaskListContextType>(undefined!);
 
-const TaskListContextProvider: React.FC = ({ children }) => {
-  const initialData: Array<ITask> = JSON.parse(
-    localStorage.getItem('tasks') || '[]'
-  );
+const TaskListContextProvider: React.FC<Props> = ({ children }) => {
+  const initialData: State = JSON.parse(localStorage.getItem('tasks') || '[]');
   const [tasks, dispatch] = useReducer(TaskListReducer, initialData);
-  const [editItem, setEditItem] = useState<ITask | undefined>(undefined);
+  const [editItem, setEditItem] = useState<ITask>();
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  const findItem = (id: string) => {
+  const findItem = (id: string): void => {
     const item: ITask | undefined = tasks.find((task: ITask) => task.id === id);
-    if (item !== undefined) {
-      setEditItem(item);
+    if (item === undefined) {
+      throw new Error('No task results for this _id!');
     }
+    setEditItem(item);
   };
 
   return (

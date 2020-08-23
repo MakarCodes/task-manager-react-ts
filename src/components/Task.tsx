@@ -1,15 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { TaskListContext } from '../context/TaskListContex';
-import { actionTypes } from '../reducers/actionTypes';
+import { ActionTypes } from '../reducers/actionTypes';
 
-type TaskPropsType = {
-  task: {
-    title: string;
-    id: string;
-  };
-};
+interface ITaskProps {
+  task: ITask;
+}
 
-const Task: React.FC<TaskPropsType> = ({ task }) => {
+const Task: React.FC<ITaskProps> = ({ task }) => {
   const { dispatch, findItem } = useContext(TaskListContext);
   return (
     <li className='list-item'>
@@ -19,7 +16,7 @@ const Task: React.FC<TaskPropsType> = ({ task }) => {
           className='btn-delete task-btn'
           onClick={() => {
             return dispatch({
-              type: actionTypes.REMOVE_TASK,
+              type: ActionTypes.REMOVE_TASK,
               payload: {
                 id: task.id,
               },
