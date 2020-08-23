@@ -1,10 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { TaskListContext } from '../context/TaskListContex';
-import * as actionTypes from '../reducers/actionTypes';
+import { actionTypes } from '../reducers/actionTypes';
 
-export interface TaskFormProps {}
-
-const TaskForm: React.FC<TaskFormProps> = () => {
+const TaskForm: React.FC = () => {
   const { dispatch, editItem, setEditItem } = useContext(TaskListContext);
   const [title, setTitle] = useState<string>('');
 

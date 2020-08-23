@@ -4,7 +4,7 @@ import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import Header from './components/Header';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className='App'>
       <TaskListContextProvider>
@@ -20,6 +20,6 @@ function App() {
       </TaskListContextProvider>
     </div>
   );
-}
+};
 
 export default App;

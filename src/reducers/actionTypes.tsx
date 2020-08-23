@@ -1,4 +1,6 @@
-export const ADD_TASK = 'ADD_TASK';
-export const REMOVE_TASK = 'REMOVE_TASK';
-export const CLEAR_TASK_LIST = 'CLEAR_TASK_LIST';
-export const EDIT_LIST = 'EDIT_LIST';
+export enum actionTypes {
+  ADD_TASK = 'ADD_TASK',
+  REMOVE_TASK = 'REMOVE_TASK',
+  CLEAR_TASK_LIST = 'CLEAR_TASK_LIST',
+  EDIT_LIST = 'EDIT_LIST',
+}

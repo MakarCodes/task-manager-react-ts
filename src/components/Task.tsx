@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { TaskListContext } from '../context/TaskListContex';
-import * as actionTypes from '../reducers/actionTypes';
+import { actionTypes } from '../reducers/actionTypes';
 
 type TaskPropsType = {
   task: {
